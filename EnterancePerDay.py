@@ -4,6 +4,7 @@ def EnterancePerDay(Pandas_Feed_table):
     from datetime import datetime
     import boto3
     print('Analizing...')
+    
     '''
     Update the table with the number of 
     Enterance per day
@@ -11,12 +12,13 @@ def EnterancePerDay(Pandas_Feed_table):
     NameOFTable = 'NumberOfEnterance'
     dynamodb = boto3.resource('dynamodb')
     Enterance_Table = dynamodb.Table(NameOFTable)
+    
     # PANDAS
     Pandas_Feed_table['dt_object'] = [datetime.fromtimestamp(float(i)).strftime("%m/%d/%Y") 
                                       for i in Pandas_Feed_table.time]
     
 #     Pandas_Feed_table['Client'] = [json.loads(s.replace("'", "\""))['ViralysisClientId'] 
-#                                for s in Pandas_Feed_table['body-json']]
+# #                                for s in Pandas_Feed_table['body-json']]
 
     groupbyTime = Pandas_Feed_table.groupby('dt_object').count().loc[:, ['body-json']]
     groupbyTime.reset_index(inplace=True)
