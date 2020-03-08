@@ -12,12 +12,13 @@ def Add_Items_And_Delete_Items():
     Pandas_Feed_table = pd.DataFrame.from_dict(Feed_tableS.get('Items'))
 
     #     Get the new feed and put them in the new table
+    print('Adding items from feed table (viralysisTable1) to DataTable (AllDataViralysis)... ')
+    print('Deleting all ''old'' items from feed table (viralysisTable1)')
     for each in Feed_tableS.get('Items'):
-        print('Adding items from feed table (viralysisTable1) to DataTable (AllDataViralysis)... ')
         Data_table.put_item(Item=each)
         
-        print('Deleting all ''old'' items from feed table (viralysisTable1)')
         Feed_table.delete_item(Key={'time': each['time']})
         
-        print('Done deleting')
-
+    print('Done deleting')
+    
+    return Pandas_Feed_table
