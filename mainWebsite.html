@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My First Heading</h1>
+
+
+<button type="button" onclick="loadDoc()">Choose date</button>
+<input type="text" id="number_of_entrances_input">
+<label  id="number_of_entrances_output"></label><br><br>
+
+<p></p>
+
+<script>
+//number of entrances
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("number_of_entrances_output").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "https://1asdd2nwvf.execute-api.us-east-1.amazonaws.com/CommunityAndViralityAnalysis/services", true);
+  xhttp.send(JSON.stringify({"date":document.getElementById("number_of_entrances_input").value,"user":"YosDos","pass":""}));
+}
+</script>
+
+</body>
+
+</html>
