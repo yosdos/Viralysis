@@ -16,11 +16,11 @@ class DecimalEncoder(json.JSONEncoder):
         return super(DecimalEncoder, self).default(o)
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-mainTable = dynamodb.Table('AllDataViralysis')
-tempTable = dynamodb.Table('viralysisTable1')
+mainTable = dynamodb.Table('allData')
+tempTable = dynamodb.Table('allDataTemp')
 
 def removeItemFromTempTable(item):
-    tempTable.delete_item(Key={'time':item['time']})
+    tempTable.delete_item(Key={'event_id':item['event_id']})
 
 def saveItemInMainTable(item):
     mainTable.put_item(Item=item)

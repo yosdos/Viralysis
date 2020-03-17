@@ -16,7 +16,7 @@ class DecimalEncoder(json.JSONEncoder):
         return super(DecimalEncoder, self).default(o)
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-mainTable = dynamodb.Table('AllDataViralysis')
+mainTable = dynamodb.Table('allData')
 
 def handleItem(item):
     RawDataProcessing.rawDataProcessing(item)
